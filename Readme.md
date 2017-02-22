@@ -1,0 +1,3 @@
+<h2> Solaris 10 bootcamp with Vagrant </h2>
+* Solaris 10 minimal installation with minimal tweaks
+* More to follow shortly...
