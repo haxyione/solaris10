@@ -1,0 +1,7 @@
+# BASIC COMMANDS:
+whoami          - prints username
+pwd             - prints current dir
+ls -al          - lists directory
+du -sh          - calculates dir size
+pkgadd <pkg>    - installs package from local storage
+pkgutil -i      - downloads and installs package
