@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "haxyione/solaris10-minimal"
+  config.vm.box = "haxyione/solaris10"
   config.vm.box_version = "0.0.1"
   config.vm.boot_timeout = 600
 
@@ -15,13 +15,14 @@ Vagrant.configure("2") do |config|
       vb.memory = `grep 'MemTotal' /proc/meminfo | sed -e 's/MemTotal://' -e 's/kb//'`.to_i / 1024 / 2
       vb.cpus = `nproc`.to_i
     elsif host =~ /windows/
-      vb.memory = `wmic get TotalPhysicalMemory`.to_i / 1024 / 1024 / 2
-      vb.cpus = `wmic get NumberOfCores`.to_i
+      vb.memory = `wmic computersystem get TotalPhysicalMemory|findstr [0..9]`.to_i / 1024 / 1024 / 2
+      vb.cpus = `wmic computersystem get NumberOfLogicalProcessors|findstr [0..9]`.to_i
     end
   end
 
   config.vm.provision "file", source: "./files/local.login", destination: "local.login"
   config.vm.provision "file", source: "./files/motd", destination: "/tmp/motd" 
+  config.vm.provision "file", source: "./files/.profile", destination: "~"
   config.vm.provision "shell", inline: <<-SHELL
     sudo pkgutil -i -y vim
     sudo cp /tmp/motd /etc/motd
