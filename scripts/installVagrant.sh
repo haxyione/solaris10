@@ -5,7 +5,7 @@ latestver=`curl -s https://releases.hashicorp.com/vagrant/ | grep vagrant | awk 
 
 if [[ $(uname) =~ "Darwin" ]] 
   then 
-#    wget https://releases.hashicorp.com/vagrant/$latestver/vagrant_$latestver.dmg
+    wget https://releases.hashicorp.com/vagrant/$latestver/vagrant_$latestver.dmg
     sudo hdiutil attach ./vagrant_$latestver.dmg
     sudo installer -pkg /Volumes/Vagrant/Vagrant.pkg -target /    
     cd /tmp 
